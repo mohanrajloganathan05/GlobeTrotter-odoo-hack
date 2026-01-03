@@ -79,6 +79,9 @@ export default function Login() {
           Don’t have an account?{" "}
           <Link to="/signup">Sign up</Link>
         </p>
+        <p className="switch-text">
+          <Link to='/forgetPassword'>Forget Password</Link>
+        </p>
       </div>
 
     </div>
