@@ -32,7 +32,7 @@ export default function Signup() {
     setError(""); 
 
     try {
-      await API.post("/auth/signup", {
+      await API.post("/signup", {
         name,
         email,
         password

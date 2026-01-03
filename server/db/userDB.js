@@ -1,9 +1,9 @@
 const dbConnect = require('./connect');
 
-// 🔹 Check if user exists
+// Check if user exists
 const checkUserExists = (email) => {
     return new Promise((resolve, reject) => {
-        const query = 'SELECT user_id FROM users WHERE email = ?';
+        const query = 'SELECT user_id FROM auth WHERE email = ?';
         dbConnect.query(query, [email], (err, results) => {
             if (err) return reject(err);
             resolve(results.length > 0);
@@ -11,10 +11,10 @@ const checkUserExists = (email) => {
     });
 };
 
-// 🔹 Insert new user
+// Insert new user
 const insertUser = (name, email, hashedPassword) => {
     return new Promise((resolve, reject) => {
-        const query = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
+        const query = 'INSERT INTO auth (name, email, password) VALUES (?, ?, ?)';
         dbConnect.query(query, [name, email, hashedPassword], (err, results) => {
             if (err) return reject(err);
             resolve(results);
@@ -22,7 +22,19 @@ const insertUser = (name, email, hashedPassword) => {
     });
 };
 
+// Get full user by email (for login)
+const getUserByEmail = (email) => {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM auth WHERE email = ?';
+        dbConnect.query(query, [email], (err, results) => {
+            if (err) return reject(err);
+            if (results.length === 0) return resolve(null);
+            resolve(results[0]);
+        });
+    });
+};
 module.exports = {
     checkUserExists,
-    insertUser
+    insertUser,
+    getUserByEmail
 };
