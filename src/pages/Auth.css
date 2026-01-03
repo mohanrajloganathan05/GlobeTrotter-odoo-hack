@@ -1,0 +1,91 @@
+.auth-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Split layout */
+.auth-container.split {
+  gap: 60px;
+}
+
+/* Animation section */
+.auth-animation {
+  max-width: 420px;
+  text-align: center;
+}
+
+.auth-animation h2 {
+  margin-top: 12px;
+  font-size: 26px;
+}
+
+.auth-animation p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Login card */
+.auth-card {
+  background: white;
+  padding: 32px;
+  width: 360px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 10px;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.auth-card button:hover {
+  background: #4f46e5;
+}
+
+.switch-text {
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.switch-text a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .auth-container.split {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .auth-animation {
+    max-width: 300px;
+  }
+}
