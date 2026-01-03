@@ -36,7 +36,7 @@ export default function Navbar() {
                         My Trips
                     </Link>
 
-                    <Link className={isActive("/create-trip") ? "active" : ""} to="/create-trip">
+                    <Link className={isActive("/create") ? "active" : ""} to="/create">
                         <PlusCircle size={18} />
                         Create Trip
                     </Link>

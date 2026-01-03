@@ -7,6 +7,8 @@ import UserProfile from './pages/UserProfile';
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedLayout from "./components/ProtectedLayout";
 import PublicRoute from "./components/PublicRoute";
+import TripList from "./pages/TripList";
+import TripDetails from "./pages/TripDetails";
 
 
 
@@ -29,6 +31,8 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create" element={<CreateTrip />} />
             <Route path='/profile' element ={<UserProfile/>}/>
+            <Route path='/trips' element ={<TripList/>}/>
+            <Route path="/trip/:tripId" element={<TripDetails />} />
           </Route>
         </Route>
 
