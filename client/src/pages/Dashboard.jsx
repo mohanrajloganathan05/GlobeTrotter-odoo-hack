@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../api";
+import CreateTrip from "./CreateTrip";
 
 export default function Dashboard() {
   const [trips, setTrips] = useState([]);
@@ -11,6 +12,7 @@ export default function Dashboard() {
   return (
     <div>
       <h1>My Trips</h1>
+      <CreateTrip/>
      {/*  {trips.map(trip => (
         <div key={trip.id}>
           <h3>{trip.title}</h3>

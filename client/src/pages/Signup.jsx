@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api";
-import "./Auth.css";
+import "../style/Auth.css";
 
 export default function Signup() {
   const [name, setName] = useState("");

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../api";
-import "./forgetPassword.css";
+import "../style/forgetPassword.css";
 import { useNavigate } from "react-router-dom";
 export default function ForgotPassword() {
   const [name, setName] = useState("");
