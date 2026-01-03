@@ -8,15 +8,33 @@ import "./Auth.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); 
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleLogin = async () => {
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (!password) {
+      setError("Please enter your password");
+      return;
+    }
+
+    setError(""); 
+
     try {
       const res = await API.post("/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch {
-      alert("Invalid credentials");
+      setError("Invalid credentials");
     }
   };
 
@@ -51,6 +69,9 @@ export default function Login() {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+
+        {/* Display error message */}
+        {error && <p style={{ color: "red", marginTop: "6px" }}>{error}</p>}
 
         <button onClick={handleLogin}>Login</button>
 

@@ -7,18 +7,39 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleSignup = async () => {
+    if (!name) {
+      setError("Please enter your full name");
+      return;
+    }
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    setError(""); 
+
     try {
       await API.post("/auth/signup", {
         name,
         email,
         password
       });
-      navigate("/");
+      navigate("/"); 
     } catch {
-      alert("Signup failed");
+      setError("Signup failed. Please try again.");
     }
   };
 
@@ -47,6 +68,9 @@ export default function Signup() {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+
+        {/* Display validation errors */}
+        {error && <p style={{ color: "red", marginTop: "6px" }}>{error}</p>}
 
         <button onClick={handleSignup}>Sign Up</button>
 
