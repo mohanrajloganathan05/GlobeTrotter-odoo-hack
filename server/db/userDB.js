@@ -33,8 +33,20 @@ const getUserByEmail = (email) => {
         });
     });
 };
+
+const updatePassword = (email, hashedPassword) => {
+    return new Promise((resolve, reject) => {
+        const query = 'UPDATE auth SET password = ? WHERE email = ?';
+        dbConnect.query(query, [hashedPassword, email], (err, result) => {
+            if (err) reject(err);
+            else resolve(result);
+        });
+    });
+};
+
 module.exports = {
     checkUserExists,
     insertUser,
-    getUserByEmail
+    getUserByEmail,
+    updatePassword
 };

@@ -31,7 +31,7 @@ export default function ForgotPassword() {
 
     setError("");
     try {
-      await API.post("/forgot-password", { name, email });
+      await API.post("/forget", { name, email });
       setStage(2); 
       setSuccess("OTP sent to your email");
     } catch {
@@ -48,7 +48,7 @@ export default function ForgotPassword() {
 
     setError("");
     try {
-      await API.post("/verify-otp", { email, otp });
+      await API.post("/verify", { email, otp });
       setStage(3); 
       setSuccess("OTP verified! Set your new password.");
     } catch {
@@ -68,7 +68,7 @@ export default function ForgotPassword() {
 
     setError("");
     try {
-      await API.post("/reset-password", { email, newPassword });
+      await API.post("/change", { email, newPassword });
       setSuccess("Password reset successfully! You can now login.");
       setStage(1);
       setName("");
