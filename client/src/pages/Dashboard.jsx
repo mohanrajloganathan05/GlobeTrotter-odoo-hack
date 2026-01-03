@@ -2,24 +2,25 @@ import { useEffect, useState } from "react";
 import { Plus, Calendar, MapPin, Wallet, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import CreateTrip from "./CreateTrip";
+import "../styles/Dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
   const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // ✅ stats is NEVER null
+  // ✅ stats must NEVER be null
   const [stats, setStats] = useState({
     totalTrips: 0,
     totalCities: 0,
     totalBudget: 0
   });
 
-  const [loading, setLoading] = useState(true);
-
-  /* AUTH CHECK + LOAD USER */
+  /* ===============================
+     AUTH CHECK + LOAD USER
+     =============================== */
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
@@ -31,23 +32,31 @@ export default function Dashboard() {
 
     const parsedUser = JSON.parse(storedUser);
 
+    // your login returns `id`
     setUser({
       id: parsedUser.id,
       name: parsedUser.name
     });
   }, [navigate]);
 
-  /* FETCH DASHBOARD DATA */
+  /* ===============================
+     FETCH TRIPS
+     =============================== */
   useEffect(() => {
     if (!user?.id) return;
 
     const fetchDashboardData = async () => {
       try {
         const res = await API.get(`/get-trips/${user.id}`);
-        const tripsData = res.data.trips || [];
 
+        const tripsData = Array.isArray(res.data.trips)
+          ? res.data.trips
+          : [];
+
+        // dashboard preview (max 3)
         setTrips(tripsData.slice(0, 3));
 
+        // stats
         setStats({
           totalTrips: tripsData.length,
           totalCities: tripsData.length, // placeholder
@@ -64,6 +73,9 @@ export default function Dashboard() {
     fetchDashboardData();
   }, [user]);
 
+  /* ===============================
+     LOADING STATE
+     =============================== */
   if (loading) {
     return (
       <div className="dashboard-loading">
@@ -72,14 +84,25 @@ export default function Dashboard() {
     );
   }
 
+  /* ===============================
+     UI
+     =============================== */
   return (
-    <div>
-      <h1>My Trips</h1>
-      <CreateTrip/>
-     {/*  {trips.map(trip => (
-        <div key={trip.id}>
-          <h3>{trip.title}</h3>
-          <p>{trip.start_date} → {trip.end_date}</p>
+    <div className="dashboard">
+
+      {/* HERO */}
+      <section className="dashboard-hero">
+        <div className="hero-text">
+          <h2>Welcome back, {user.name} 🌍</h2>
+          <p>Your next journey starts here</p>
+
+          <button
+            className="primary-btn"
+            onClick={() => navigate("/create")}
+          >
+            <Plus size={18} />
+            Plan New Trip
+          </button>
         </div>
       </section>
 
@@ -140,10 +163,15 @@ export default function Dashboard() {
                 className="trip-card"
                 onClick={() => navigate("/my-trips")}
               >
-                <img src="/trip-placeholder.jpg" alt={trip.trip_name} />
+                <img
+                  src="/trip-placeholder.jpg"
+                  alt={trip.trip_name}
+                />
                 <div className="trip-info">
                   <h4>{trip.trip_name}</h4>
-                  <p>{trip.start_date} – {trip.end_date}</p>
+                  <p>
+                    {trip.start_date} – {trip.end_date}
+                  </p>
                 </div>
               </div>
             ))}
