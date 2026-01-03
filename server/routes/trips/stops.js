@@ -32,4 +32,18 @@ router.post("/", (req, res) => {
   );
 });
 
+router.get("/:tripId", (req, res) => {
+  const tripId = req.params.tripId;
+
+  const sql = "SELECT * FROM stops WHERE trip_id = ? ORDER BY stop_order ASC";
+  db.query(sql, [tripId], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Database error", error: err });
+    }
+    res.json(results);
+  });
+});
+
+
 module.exports = router;
