@@ -9,6 +9,7 @@ const forgetRoute = require('./routes/authentication/forget');
 const verifyRoute = require('./routes/authentication/verify');
 const changeRoute = require('./routes/authentication/change');
 const createTripRoute = require('./routes/trips/create');
+const getTripsRoute = require('./routes/trips/getTrips');
 
 const port = process.env.PORT
 app.use(express.json({ limit: '15mb' }));
@@ -20,6 +21,7 @@ app.use('/forget',forgetRoute);
 app.use('/verify',verifyRoute);
 app.use('/change',changeRoute);
 app.use('/create-trip',createTripRoute);
+app.use('/get-trips', getTripsRoute)
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
