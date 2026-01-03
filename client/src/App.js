@@ -3,17 +3,33 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CreateTrip from "./pages/CreateTrip";
 import Signup from "./pages/Signup";
-import ForgetPassword from './pages/ForgetPassword';
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedLayout from "./components/ProtectedLayout";
+import PublicRoute from "./components/PublicRoute";
+
+
+
+
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/create" element={<CreateTrip />} />
-        <Route path="/Signup" element={<Signup/>}/>
-        <Route path="/forgetPassword" element={<ForgetPassword/>}/>
+
+        {/* Public routes (ONLY when logged out) */}
+        <Route element={<PublicRoute />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+
+        {/* Protected Routes Wrapper */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/create" element={<CreateTrip />} />
+          </Route>
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );

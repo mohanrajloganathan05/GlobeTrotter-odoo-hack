@@ -76,7 +76,7 @@ export default function Signup() {
 
         <p className="switch-text">
           Already have an account?{" "}
-          <Link to="/">Login</Link>
+          <Link to="/" replace>Login</Link>
         </p>
       </div>
     </div>
