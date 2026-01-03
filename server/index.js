@@ -8,10 +8,10 @@ const loginRoute = require('./routes/authentication/login');
 const forgetRoute = require('./routes/authentication/forget');
 const verifyRoute = require('./routes/authentication/verify');
 const changeRoute = require('./routes/authentication/change');
-const createTripRoute = require('/routes/trips/create');
+const createTripRoute = require('./routes/trips/create');
 
 const port = process.env.PORT
-app.use(express.json());
+app.use(express.json({ limit: '15mb' }));
 app.use(cors());
 
 app.use('/signup',signupRoute);

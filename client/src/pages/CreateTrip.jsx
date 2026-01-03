@@ -17,7 +17,7 @@ const CreateTrip = () => {
     startDate: "",
     endDate: "",
     description: "",
-    coverPhoto: null,
+    cover_photo: null,
   });
 
   const handleChange = (e) => {
@@ -26,7 +26,7 @@ const CreateTrip = () => {
   };
 
   const handleFileChange = (e) => {
-    setTripData({ ...tripData, coverPhoto: e.target.files[0] });
+    setTripData({ ...tripData, cover_photo: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
@@ -40,8 +40,8 @@ const CreateTrip = () => {
       }
 
       let base64Image = null;
-      if (tripData.coverPhoto) {
-        base64Image = await convertToBase64(tripData.coverPhoto);
+      if (tripData.cover_photo) {
+        base64Image = await convertToBase64(tripData.cover_photo);
       }
 
       const payload = {
@@ -67,7 +67,7 @@ const CreateTrip = () => {
         startDate: "",
         endDate: "",
         description: "",
-        coverPhoto: null,
+        cover_photo: null,
       });
 
     } catch (error) {
