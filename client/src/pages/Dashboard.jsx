@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Plus, Calendar, MapPin, Wallet, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "../styles/Dashboard.css";
+import CreateTrip from "./CreateTrip";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -73,21 +73,13 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="dashboard">
-
-      {/* HERO */}
-      <section className="dashboard-hero">
-        <div className="hero-text">
-          <h2>Welcome back, {user.name} 🌍</h2>
-          <p>Your next journey starts here</p>
-
-          <button
-            className="primary-btn"
-            onClick={() => navigate("/create")}
-          >
-            <Plus size={18} />
-            Plan New Trip
-          </button>
+    <div>
+      <h1>My Trips</h1>
+      <CreateTrip/>
+     {/*  {trips.map(trip => (
+        <div key={trip.id}>
+          <h3>{trip.title}</h3>
+          <p>{trip.start_date} → {trip.end_date}</p>
         </div>
       </section>
 

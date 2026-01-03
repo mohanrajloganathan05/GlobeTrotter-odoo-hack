@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import travelAnimation from "../assets/LoginAnimation.json";
 import API from "../api";
-import "./Auth.css";
+import "../style/Auth.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
